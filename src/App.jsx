@@ -1,10 +1,10 @@
 
 import './App.css'
-import ParolaList from './components/ParolaList'
+import Increment from './components/Increment'
 
 function App() {
   return (
-    <ParolaList />
+    <Increment />
   )
 }
 
