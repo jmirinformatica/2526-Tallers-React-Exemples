@@ -16,7 +16,7 @@ const INITIAL_PAROLE = [
 ];
 
 const STORAGE_KEY = 'vocabulari-parole';
-const API_URL = 'http://localhost:3000/parole';
+const API_URL = `${import.meta.env.VITE_API_URL}/parole`;
 
 export default function ParolaList() {
   const [parole, setParole] = useState([]);

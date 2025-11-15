@@ -1,15 +1,33 @@
+
 import { useState, useContext } from 'react';
 import { UserContext } from '../App';
 
+const API_URL = `${import.meta.env.VITE_API_URL}/users`;
+
 export default function Login() {
   const [username, setUsername] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { setUsuari } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username.trim()) {
-      // Establim l'usuari al context
-      setUsuari({ username: username.trim() });
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error('No es pot connectar amb el servidor');
+      const users = await res.json();
+      const found = users.find(u => u.username === username.trim());
+      if (found) {
+        setUsuari({ username: found.username });
+      } else {
+        setError('Usuari no trobat');
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,12 +51,13 @@ export default function Login() {
             placeholder="Introdueix el teu nom"
           />
         </div>
-
+        {error && <div style={{ color: 'crimson', fontSize: '14px' }}>{error}</div>}
         <button
           type="submit"
-          style={{ padding: '10px', cursor: 'pointer' }}
+          style={{ padding: '10px', cursor: loading ? 'not-allowed' : 'pointer' }}
+          disabled={loading}
         >
-          Entrar
+          {loading ? 'Validant...' : 'Entrar'}
         </button>
       </form>
     </section>

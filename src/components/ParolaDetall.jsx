@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-const API_URL = 'http://localhost:3000/parole';
+const API_URL = `${import.meta.env.VITE_API_URL}/parole`;
 const STORAGE_KEY = 'vocabulari-parole';
 
 export default function ParolaDetall() {
