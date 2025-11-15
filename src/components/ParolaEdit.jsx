@@ -11,11 +11,11 @@ export default function ParolaEdit({ onCancel, onUpdate, parola }) {
   const [form, setForm] = useState(parola || INITIAL_FORM);
 
   // Carregar dades quan canvia la paraula
-  useEffect(() => {
-    if (parola) {
-      setForm(parola);
-    }
-  }, [parola]);
+  // useEffect(() => {
+  //   if (parola) {
+  //     setForm(parola);
+  //   }
+  // }, [parola]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ParolaEdit from './ParolaEdit';
 
 export default function Parola({ parola, onDelete, onUpdate }) {
@@ -21,6 +22,12 @@ export default function Parola({ parola, onDelete, onUpdate }) {
           <span>{parola.translation}</span>
         </div>
         <div>
+          <Link
+            to={`/parole/${parola.id}`}
+            style={{ marginRight: '8px' }}
+          >
+            Veure
+          </Link>
           <button
             type="button"
             onClick={() => setIsEditing(v => !v)}
@@ -86,3 +93,5 @@ export default function Parola({ parola, onDelete, onUpdate }) {
     </>
   );
 }
+
+
