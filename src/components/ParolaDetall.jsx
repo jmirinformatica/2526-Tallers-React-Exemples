@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 const API_URL = `${import.meta.env.VITE_API_URL}/parole`;
-const STORAGE_KEY = 'vocabulari-parole';
+// const STORAGE_KEY = 'vocabulari-parole';
 
 export default function ParolaDetall() {
   const { id } = useParams();
@@ -30,25 +30,24 @@ export default function ParolaDetall() {
         console.error('Error carregant paraula:', err);
         if (!isMounted) return;
         
-        // Fallback a localStorage
-        let found = false;
-        try {
-          const stored = localStorage.getItem(STORAGE_KEY);
-          if (stored) {
-            const arr = JSON.parse(stored);
-            const foundItem = arr.find((p) => String(p.id) === String(id));
-            if (foundItem) {
-              setItem(foundItem);
-              found = true;
-            }
-          }
-        } catch (localErr) {
-          console.error('Error localStorage:', localErr);
-        }
-        
-        if (!found) {
-          setError(err.message);
-        }
+        // Fallback a localStorage (opcional)
+        // let found = false;
+        // try {
+        //   const stored = localStorage.getItem(STORAGE_KEY);
+        //   if (stored) {
+        //     const arr = JSON.parse(stored);
+        //     const foundItem = arr.find((p) => String(p.id) === String(id));
+        //     if (foundItem) {
+        //       setItem(foundItem);
+        //       found = true;
+        //     }
+        //   }
+        // } catch (localErr) {
+        //   console.error('Error localStorage:', localErr);
+        // }
+        // if (!found) {
+        setError(err.message);
+        // }
         setLoading(false);
       });
     return () => {

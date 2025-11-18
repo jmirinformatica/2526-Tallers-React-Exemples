@@ -25,8 +25,9 @@ export default function ParolaEdit({ onCancel, onUpdate, parola }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.word || !form.translation) return;
-    // Passar dades actualitzades al pare
-    onUpdate && onUpdate(form);
+    // Passar dades actualitzades al pare (sense l'id, només word i translation)
+    const { word, translation } = form;
+    onUpdate && onUpdate({ word, translation });
   };
 
   return (
