@@ -13,6 +13,9 @@ export default function ParolaDetall() {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
+    setError(null);
+    setItem(null);
+    
     fetch(`${API_URL}/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error('No s\'ha pogut carregar la paraula');
@@ -24,20 +27,28 @@ export default function ParolaDetall() {
         setLoading(false);
       })
       .catch((err) => {
+        console.error('Error carregant paraula:', err);
         if (!isMounted) return;
-        setError(err.message);
+        
         // Fallback a localStorage
+        let found = false;
         try {
           const stored = localStorage.getItem(STORAGE_KEY);
           if (stored) {
             const arr = JSON.parse(stored);
-            const found = arr.find((p) => String(p.id) === String(id));
-            if (found) {
-              setItem(found);
-              setError(null);
+            const foundItem = arr.find((p) => String(p.id) === String(id));
+            if (foundItem) {
+              setItem(foundItem);
+              found = true;
             }
           }
-        } catch {}
+        } catch (localErr) {
+          console.error('Error localStorage:', localErr);
+        }
+        
+        if (!found) {
+          setError(err.message);
+        }
         setLoading(false);
       });
     return () => {
