@@ -15,7 +15,7 @@ const INITIAL_PAROLE = [
   { id: 10, word: 'prosciutto', translation: 'pernil' } 
 ];
 
-const STORAGE_KEY = 'vocabulari-parole';
+// const STORAGE_KEY = 'vocabulari-parole';
 const API_URL = `${import.meta.env.VITE_API_URL}/parole`;
 
 export default function ParolaList() {
@@ -58,13 +58,12 @@ export default function ParolaList() {
         throw new Error('Error esborrant la paraula');
       }
 
-      // Actualitzem l'estat local. 
-      // També podriem fer un altre fetch de l'api
+      // Actualitzem l'estat local
       setParole(prev => prev.filter(p => p.id !== id));
       
-      // Guardem al localStorage
-      const updatedParole = parole.filter(p => p.id !== id);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedParole));
+      // Guardem al localStorage (opcional)
+      // const updatedParole = parole.filter(p => p.id !== id);
+      // localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedParole));
     } catch (err) {
       console.error('Error:', err);
       alert('Error esborrant la paraula del servidor');
@@ -73,15 +72,13 @@ export default function ParolaList() {
 
   // Afegir nova paraula (amb .then/.catch)
   const handleAdd = (data) => {
-    const maxId = parole.length > 0 ? Math.max(...parole.map(p => p.id)) : 0;
-    const newParola = { id: maxId + 1, ...data };
-
+    // No enviem l'ID, json-server el generarà automàticament
     fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newParola),
+      body: JSON.stringify(data),
     })
       .then(response => {
         if (!response.ok) {
@@ -93,9 +90,9 @@ export default function ParolaList() {
         // Actualitzem l'estat amb la paraula guardada (té l'ID del servidor)
         setParole(prev => [...prev, savedParola]);
         
-        // Guardem al localStorage
-        const updatedParole = [...parole, savedParola];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedParole));
+        // Guardem al localStorage (opcional)
+        // const updatedParole = [...parole, savedParola];
+        // localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedParole));
         
         setShowForm(false);
       })
@@ -113,7 +110,7 @@ export default function ParolaList() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id, ...updatedData }),
+        body: JSON.stringify(updatedData),
       });
 
       if (!response.ok) {
@@ -127,11 +124,11 @@ export default function ParolaList() {
         p.id === id ? updatedParola : p
       ));
 
-      // Guardem al localStorage
-      const updatedParole = parole.map(p => 
-        p.id === id ? updatedParola : p
-      );
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedParole));
+      // Guardem al localStorage (opcional)
+      // const updatedParole = parole.map(p => 
+      //   p.id === id ? updatedParola : p
+      // );
+      // localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedParole));
     } catch (err) {
       console.error('Error:', err);
       alert('Error actualitzant la paraula al servidor');
