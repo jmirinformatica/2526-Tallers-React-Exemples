@@ -32,34 +32,58 @@ export default function Login() {
   };
 
   return (
-    <section style={{ maxWidth: '400px', margin: '50px auto', padding: '20px' }}>
-      <h1>Login</h1>
-      <p>Introdueix el teu nom d'usuari per accedir</p>
+    <div className="vh-100 d-flex align-items-center justify-content-center bg-light">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4">
+            <div className="card shadow-lg border-0" style={{ minWidth: '320px' }}>
+              <div className="card-body p-4">
+                <div className="text-center mb-3">
+                  <h1 className="h3 fw-bold text-primary mb-2">Benvingut/da</h1>
+                  <p className="text-muted small mb-0">Introdueix el teu nom d'usuari per accedir</p>
+                </div>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <div>
-          <label htmlFor="username" style={{ display: 'block', marginBottom: '4px' }}>
-            Usuari
-          </label>
-          <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            style={{ width: '100%', padding: '8px' }}
-            placeholder="Introdueix el teu nom"
-          />
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="username" className="form-label">
+                      Nom d'usuari
+                    </label>
+                    <input
+                      id="username"
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      className="form-control"
+                      placeholder="Introdueix el teu nom"
+                      autoComplete="username"
+                    />
+                  </div>
+                  {error && (
+                    <div className="alert alert-danger py-2 small" role="alert">
+                      {error}
+                    </div>
+                  )}
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-100"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Validant...
+                      </>
+                    ) : (
+                      'Entrar'
+                    )}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        {error && <div style={{ color: 'crimson', fontSize: '14px' }}>{error}</div>}
-        <button
-          type="submit"
-          style={{ padding: '10px', cursor: loading ? 'not-allowed' : 'pointer' }}
-          disabled={loading}
-        >
-          {loading ? 'Validant...' : 'Entrar'}
-        </button>
-      </form>
-    </section>
+      </div>
+    </div>
   );
 }

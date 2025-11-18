@@ -10,53 +10,50 @@ export default function Header() {
   };
 
   return (
-    <header>
-      <nav style={{ display: 'flex', gap: '12px', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', gap: '12px' }}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
+      <div className="container-fluid">
+        <span className="navbar-brand">Diccionari Italià</span>
+        <div className="navbar-nav me-auto">
           <NavLink
             to="/"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? '700' : '400',
-              textDecoration: isActive ? 'underline' : 'none'
-            })}
+            className={({ isActive }) => 
+              isActive ? 'nav-link active fw-bold' : 'nav-link'
+            }
             end
           >
             Inici
           </NavLink>
           <NavLink
             to="/parole"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? '700' : '400',
-              textDecoration: isActive ? 'underline' : 'none'
-            })}
+            className={({ isActive }) => 
+              isActive ? 'nav-link active fw-bold' : 'nav-link'
+            }
           >
             Vocabulari
           </NavLink>
           <NavLink
             to="/about"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? '700' : '400',
-              textDecoration: isActive ? 'underline' : 'none'
-            })}
+            className={({ isActive }) => 
+              isActive ? 'nav-link active fw-bold' : 'nav-link'
+            }
           >
             About
           </NavLink>
         </div>
-
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+        <div className="d-flex align-items-center gap-3">
           {usuari && (
-            <span style={{ fontSize: '14px', color: '#555' }}>
+            <span className="text-secondary">
               👤 {usuari.username}
             </span>
           )}
           <button
             onClick={handleLogout}
-            style={{ padding: '4px 12px', cursor: 'pointer', textDecoration: 'underline', background: 'none', border: 'none', color: 'inherit' }}
+            className="btn btn-outline-danger btn-sm"
           >
             Logout
           </button>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 }

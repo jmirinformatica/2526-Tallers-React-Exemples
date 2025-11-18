@@ -15,27 +15,29 @@ export default function Parola({ parola, onDelete, onUpdate }) {
 
   return (
     <>
-      <div>
+      <div className="d-flex justify-content-between align-items-center">
         <div>
-          <span>{parola.word}</span>
-          <span> → </span>
-          <span>{parola.translation}</span>
+          <span className="fw-bold">{parola.word}</span>
+          <span className="mx-2">→</span>
+          <span className="text-muted">{parola.translation}</span>
         </div>
-        <div>
+        <div className="btn-group btn-group-sm" role="group">
           <Link
             to={`/parole/${parola.id}`}
-            style={{ marginRight: '8px' }}
+            className="btn btn-info"
           >
             Veure
           </Link>
           <button
             type="button"
+            className="btn btn-warning"
             onClick={() => setIsEditing(v => !v)}
           >
             {isEditing ? 'Tancar' : 'Editar'}
           </button>
           <button
             type="button"
+            className="btn btn-danger"
             onClick={() => setShowDeleteModal(true)}
           >
             Esborrar
@@ -44,7 +46,7 @@ export default function Parola({ parola, onDelete, onUpdate }) {
       </div>
 
       {isEditing && (
-        <div>
+        <div className="mt-3">
           <ParolaEdit 
             parola={parola}
             onCancel={() => setIsEditing(false)}
@@ -57,30 +59,32 @@ export default function Parola({ parola, onDelete, onUpdate }) {
       )}
 
       {showDeleteModal && (
-        <div>
-          <div>
-            <div>
-              <div>
-                <h6>Confirmar esborrament</h6>
+        <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirmar esborrament</h5>
                 <button 
                   type="button" 
+                  className="btn-close"
                   onClick={() => setShowDeleteModal(false)}
-                >
-                  X
-                </button>
+                  aria-label="Close"
+                ></button>
               </div>
-              <div>
-                <p>Segur que vols esborrar "{parola.word}"?</p>
+              <div className="modal-body">
+                <p>Segur que vols esborrar "<strong>{parola.word}</strong>"?</p>
               </div>
-              <div>
+              <div className="modal-footer">
                 <button 
                   type="button" 
+                  className="btn btn-secondary"
                   onClick={() => setShowDeleteModal(false)}
                 >
                   Cancel·lar
                 </button>
                 <button 
                   type="button" 
+                  className="btn btn-danger"
                   onClick={handleConfirmDelete}
                 >
                   Esborrar

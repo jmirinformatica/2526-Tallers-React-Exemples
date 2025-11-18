@@ -46,29 +46,39 @@ export default function ParolaDetall() {
   }, [id]);
 
   return (
-    <section>
-      <div style={{ marginBottom: '12px' }}>
-        <h2 style={{ margin: 0 }}>Detall de la paraula</h2>
-        <Link to="/parole">← Tornar al llistat</Link>
+    <div className="container">
+      <div className="mb-4">
+        <h2>Detall de la paraula</h2>
+        <Link to="/parole" className="btn btn-secondary btn-sm">← Tornar al llistat</Link>
       </div>
 
       {loading ? (
-        <p>Carregant...</p>
+        <div className="text-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Carregant...</span>
+          </div>
+        </div>
       ) : error && !item ? (
-        <p style={{ color: 'crimson' }}>Error: {error}</p>
+        <div className="alert alert-danger" role="alert">
+          Error: {error}
+        </div>
       ) : item ? (
-        <div>
-          <p><strong>Paraula:</strong> {item.word}</p>
-          <p><strong>Traducció:</strong> {item.translation}</p>
-          <hr />
-          <p>
-            <strong>Definició:</strong>{' '}
-            Paraula italiana "{item.word}" que significa "{item.translation}".
-          </p>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">{item.word}</h5>
+            <h6 className="card-subtitle mb-3 text-muted">{item.translation}</h6>
+            <hr />
+            <p className="card-text">
+              <strong>Definició:</strong>{' '}
+              Paraula italiana "<em>{item.word}</em>" que significa "<em>{item.translation}</em>".
+            </p>
+          </div>
         </div>
       ) : (
-        <p>No s'ha trobat la paraula.</p>
+        <div className="alert alert-warning" role="alert">
+          No s'ha trobat la paraula.
+        </div>
       )}
-    </section>
+    </div>
   );
 }

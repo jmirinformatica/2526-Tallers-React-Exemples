@@ -1,16 +1,19 @@
 export default function NotFound() {
   return (
-    <section style={{ textAlign: 'center', padding: '2rem' }}>
-      <h1>404 - No trobat</h1>
-      <p>Ups! Aquesta ruta s'ha perdut entre paraules...</p>
+    <div className="container text-center py-5">
+      <h1 className="display-1">404</h1>
+      <h2 className="mb-3">No trobat</h2>
+      <p className="lead">Ups! Aquesta ruta s'ha perdut entre paraules...</p>
       <img 
         src="https://http.cat/404" 
         alt="Gat amb estat 404" 
-        style={{ maxWidth: '320px', width: '100%', borderRadius: '8px', marginTop: '1rem' }}
+        className="img-fluid rounded mt-4"
+        style={{ maxWidth: '320px' }}
       />
-      <p style={{ marginTop: '1rem' }}>
-        Torna a <a href="/">l'inici</a> o explora el <a href="/parole">vocabulari</a>.
-      </p>
-    </section>
+      <div className="mt-4">
+        <a href="/" className="btn btn-primary me-2">Tornar a l'inici</a>
+        <a href="/parole" className="btn btn-secondary">Explora el vocabulari</a>
+      </div>
+    </div>
   );
 }

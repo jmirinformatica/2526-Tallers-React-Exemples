@@ -21,16 +21,18 @@ function App() {
       {!usuari ? (
         <Login />
       ) : (
-        <>
+        <div className="min-vh-100">
           <Header />
-          <Routes>
-            <Route path="/" element={<Inici />} />
-            <Route path="/parole" element={<ParolaList />} />
-            <Route path="/parole/:id" element={<ParolaDetall />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </>
+          <main className="pb-4">
+            <Routes>
+              <Route path="/" element={<Inici />} />
+              <Route path="/parole" element={<ParolaList />} />
+              <Route path="/parole/:id" element={<ParolaDetall />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
       )}
     </UserContext.Provider>
   )

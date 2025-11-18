@@ -139,29 +139,33 @@ export default function ParolaList() {
   };
 
   return (
-    <section>
-      <div>
+    <div className="container">
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <h2>Vocabulari</h2>
       </div>
 
       {loading ? (
-        <div>
-          <p>Carregant dades del servidor...</p>
+        <div className="text-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Carregant...</span>
+          </div>
+          <p className="mt-2">Carregant dades del servidor...</p>
         </div>
       ) : (
         <>
           {error && (
-            <div style={{ color: 'orange', marginBottom: '10px' }}>
+            <div className="alert alert-warning" role="alert">
               ⚠️ {error} (Utilitzant dades locals)
             </div>
           )}
 
-          <div>
+          <div className="mb-3">
             <button
               type="button"
+              className="btn btn-success"
               onClick={() => setShowForm(v => !v)}
             >
-              {showForm ? 'Amagar formulari' : 'Nova paraula'}
+              {showForm ? 'Amagar formulari' : '+ Nova paraula'}
             </button>
           </div>
 
@@ -172,9 +176,9 @@ export default function ParolaList() {
             />
           )}
 
-          <ul>
+          <ul className="list-group">
             {parole.map(p => (
-              <li key={p.id}>
+              <li key={p.id} className="list-group-item">
                 <Parola 
                   parola={p} 
                   onDelete={handleDelete}
@@ -185,7 +189,7 @@ export default function ParolaList() {
           </ul>
         </>
       )}
-    </section>
+    </div>
   );
 }
 

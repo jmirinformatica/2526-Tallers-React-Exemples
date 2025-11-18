@@ -30,40 +30,40 @@ export default function ParolaEdit({ onCancel, onUpdate, parola }) {
   };
 
   return (
-    <div>
-      <div>
-        <span>Editar paraula</span>
-        <button type="button" onClick={onCancel}>
-          Tancar
-        </button>
+    <div className="card">
+      <div className="card-header d-flex justify-content-between align-items-center bg-warning">
+        <span className="fw-bold">Editar paraula</span>
+        <button type="button" className="btn-close" onClick={onCancel}></button>
       </div>
-      <div>
+      <div className="card-body">
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Paraula</label>
+          <div className="mb-3">
+            <label className="form-label">Paraula</label>
             <input
               type="text"
               name="word"
+              className="form-control"
               value={form.word}
               onChange={handleChange}
               required
             />
           </div>
-          <div>
-            <label>Traducció</label>
+          <div className="mb-3">
+            <label className="form-label">Traducció</label>
             <input
               type="text"
               name="translation"
+              className="form-control"
               value={form.translation}
               onChange={handleChange}
               required
             />
           </div>
-          <div>
-            <button type="button" onClick={() => setForm(parola)}>
+          <div className="d-flex gap-2">
+            <button type="button" className="btn btn-secondary" onClick={() => setForm(parola)}>
               Restaurar
             </button>
-            <button type="submit">
+            <button type="submit" className="btn btn-success">
               Actualitzar
             </button>
           </div>
